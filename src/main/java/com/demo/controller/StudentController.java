@@ -12,7 +12,7 @@ public class StudentController {
 	@Autowired
 	private StudentService service;
 	
-	@PostMapping("/add")
+	@PostMapping("/addy")
 	public String addStudent(String name,String email,String password)
 	{
 		Student s=new Student();
