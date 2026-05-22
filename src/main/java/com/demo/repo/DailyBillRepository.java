@@ -10,9 +10,9 @@ import com.demo.model.DailyBill;
 public interface DailyBillRepository extends JpaRepository<DailyBill, String> {
     
     // Automatically generates SQL: SELECT * FROM dailybill WHERE ott = ?
-    DailyBill findByOtt(Integer ott);
+    DailyBill findByOtp(Integer otp);
     
     // Automatically generates SQL: DELETE FROM dailybill WHERE ott = ?
     @Transactional
-    void deleteByOtt(Integer ott);
+    void deleteByOtp(Integer otp);
 }

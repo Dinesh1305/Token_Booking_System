@@ -13,13 +13,13 @@ public class DailyBill {
     
     private Integer count;
     
-    private Integer ott;
+    private Integer otp;
 
     // Getters and Setters
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public Integer getCount() { return count; }
     public void setCount(Integer count) { this.count = count; }
-    public Integer getOtt() { return ott; }
-    public void setOtt(Integer ott) { this.ott = ott; }
+    public Integer getOtp() { return otp; }
+    public void setOtp(Integer otp) { this.otp = otp; }
 }

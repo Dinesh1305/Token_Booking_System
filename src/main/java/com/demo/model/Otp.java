@@ -20,4 +20,9 @@ public class Otp {
     public void setEmail(String email) { this.email = email; }
     public Integer getOtp() { return otp; }
     public void setOtp(Integer otp) { this.otp = otp; }
+	@Override
+	public String toString() {
+		return "Otp [id=" + id + ", email=" + email + ", otp=" + otp + "]";
+	}
+    
 }

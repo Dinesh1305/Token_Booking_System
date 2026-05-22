@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.demo.model.DailyBill;
+import com.demo.model.Otp;
 import com.demo.repo.DailyBillRepository;
 
 @Service
 public class OtpService {
-
+	  @Autowired
+	    private com.demo.repo.OtpRepository otpRepository;
     @Autowired
     private DailyBillRepository dailyBillRepository;
 
@@ -51,7 +53,7 @@ public class OtpService {
 
         bill.setCount(1);
 
-        bill.setOtt(otpNo);
+        bill.setOtp(otpNo);
 
         dailyBillRepository.save(bill);
 
@@ -126,11 +128,16 @@ public class OtpService {
         DailyBill bill =
             dailyBillRepository.findById(email).orElse(null);
 
-        if (bill != null && bill.getOtt() == userOtp) {
+        if (bill != null && bill.getOtp() == userOtp) {
 
             dailyBillRepository.delete(bill);
 
             System.out.println("OTP Verified");
+            Otp t=new Otp();
+            t.setEmail(bill.getEmail());
+            
+            t.setOtp(bill.getOtp());
+            otpRepository.save(t);
 
             return true;
         }
