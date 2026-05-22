@@ -15,9 +15,6 @@ public class VerificationController {
 
     @Autowired
     private DailyBillRepository dailyBillRepository;
-    
-    @Autowired
-    private com.demo.repo.OtpRepository otpRepository;
 
     // --- ADD THIS NEW METHOD ---
     // This displays the admin form when you visit http://localhost:9002/admin/dashboard
@@ -26,7 +23,11 @@ public class VerificationController {
         return "admin_dashboard"; // Maps to src/main/resources/templates/admin_dashboard.html
     }
 
+    // This remains the same as before
+  
 
+    @Autowired
+    private com.demo.repo.OtpRepository otpRepository; // Inject new repo
 
     @PostMapping("/verify")
     public String verifyOtp(@RequestParam("otp") String otpStr, Model model) {
