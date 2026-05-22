@@ -45,24 +45,44 @@ public class TokenController {
     public String verifyOtp(@RequestParam("otp") String userOtp,
                             @RequestParam("foodItem") String food,
                             @CookieValue(value = "email", required = false) String email,
-                            RedirectAttributes redirectAttributes) { // Added RedirectAttributes
+                            jakarta.servlet.http.HttpServletResponse response,
+                            RedirectAttributes redirectAttributes) { 
         
         if (email == null) {
-            // Use addFlashAttribute to safely pass messages across a redirect
-            redirectAttributes.addFlashAttribute("bookingMessage", "Session expired. Please login again.");
-            return "redirect:/book"; 
+            redirectAttributes.addFlashAttribute("error", "Session expired. Please login again.");
+            return "redirect:/"; 
         }
 
         boolean isValid = otpService.verifyAndDeleteOtp(email, Integer.parseInt(userOtp));
 
         if (isValid) {
+            // 1. Write to Excel
             excelService.addToExcel(food, email);
-            redirectAttributes.addFlashAttribute("bookingMessage", "✅ TOKEN ADDED SUCCESSFULLY FOR " + food.toUpperCase());
-        } else {
-            redirectAttributes.addFlashAttribute("bookingMessage", "❌ Invalid OTP. Please try again.");
-        }
+            
+            // 2. Send the Success Email
+            otpService.sendBookingSuccessEmail(email, food);
+            
+            // 3. Log the user out by deleting their cookies
+            jakarta.servlet.http.Cookie emailCookie = new jakarta.servlet.http.Cookie("email", null);
+            emailCookie.setMaxAge(0); // 0 deletes the cookie
+            emailCookie.setPath("/");
+            
+            jakarta.servlet.http.Cookie passCookie = new jakarta.servlet.http.Cookie("password", null);
+            passCookie.setMaxAge(0);
+            passCookie.setPath("/");
+            
+            response.addCookie(emailCookie);
+            response.addCookie(passCookie);
 
-        // FIXED: Use redirect instead of forward to prevent the 405 POST error
-        return "redirect:/book"; 
+            // 4. Redirect to login with a success message
+            redirectAttributes.addFlashAttribute("successMsg", "Token booked successfully! Check your email.");
+            return "redirect:/"; 
+            
+        } else {
+            // If OTP is wrong, send them back to the OTP page to try again
+            redirectAttributes.addAttribute("foodItem", food);
+            redirectAttributes.addFlashAttribute("errorMsg", "❌ Invalid OTP. Please try again.");
+            return "redirect:/enterOtp"; 
+        }
     }
 }
