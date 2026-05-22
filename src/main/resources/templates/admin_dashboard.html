@@ -7,73 +7,246 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.06);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+            padding: 36px 32px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 28px;
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.18);
+            border: 2px solid rgba(255,255,255,0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .card-body {
+            padding: 8px 32px 32px;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 6px;
+            text-align: left;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 17px;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: #111827;
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+            box-sizing: border-box;
+        }
+        .text-input::placeholder { color: #b0b7c3; }
+        .text-input:focus {
+            border-color: #2563eb;
+            background: #fff;
+            box-shadow: 0 0 0 3.5px rgba(37,99,235,0.13);
+        }
+
+        .otp-input {
+            width: 100%;
+            padding: 13px 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.55em;
+            text-align: center;
+            color: #1d4ed8;
+            background: #f0f5ff;
+            border: 1.5px solid #c7d7fd;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+            box-sizing: border-box;
+        }
+        .otp-input::placeholder { color: #c7d7fd; letter-spacing: 0.45em; }
+        .otp-input:focus {
+            border-color: #2563eb;
+            background: #fff;
+            box-shadow: 0 0 0 3.5px rgba(37,99,235,0.13);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px 16px;
+            background: #2563eb;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+            box-shadow: 0 2px 12px rgba(37,99,235,0.22);
+        }
+        .submit-btn:hover {
+            background: #1d4ed8;
+            box-shadow: 0 4px 18px rgba(37,99,235,0.30);
+        }
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #f3f4f6;
+            margin: 24px 0 16px;
+        }
+
+        .logout-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .logout-link:hover { color: #2563eb; }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: middle;
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4" style="background: #eef2f7;">
 
-    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm text-center">
+    <div class="card">
 
-        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
-            <span class="text-3xl">👨‍🍳</span>
+        <!-- Header -->
+        <div class="card-header">
+            <div class="avatar">👨‍🍳</div>
+            <h2 style="margin:0 0 4px; font-size:22px; font-weight:600; color:#fff;">Admin Dashboard</h2>
+            <p style="margin:0; font-size:13px; color:rgba(255,255,255,0.72);">Meal Verification Portal</p>
         </div>
 
-        <h2 class="text-2xl font-bold text-gray-800 mb-2">
-            Admin Dashboard
-        </h2>
+        <!-- Body -->
+        <div class="card-body">
 
-        <p class="text-gray-500 text-sm mb-6">
-            Enter student email and 4-digit token OTP to verify the meal.
-        </p>
+            <p style="font-size:13px; color:#6b7280; text-align:center; margin: 0 0 22px;">
+                Enter student email and 4-digit token OTP to verify the meal.
+            </p>
 
-        <form action="/admin_verify" method="post" class="space-y-5">
+            <form action="/admin_verify" method="post" style="display:flex; flex-direction:column; gap:16px;">
 
-            <!-- Email -->
-            <div>
-                <input type="email"
-                       name="email"
-                       required
-                       placeholder="Student Email"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-xl 
-                              focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                <!-- Email -->
+                <div>
+                    <label class="field-label">Student Email</label>
+                    <div class="input-wrap">
+                        <i class="ti ti-mail input-icon"></i>
+                        <input type="email"
+                               name="email"
+                               required
+                               placeholder="student@university.edu"
+                               class="text-input">
+                    </div>
+                </div>
+
+                <!-- OTP — unchanged name, type, maxlength, pattern -->
+                <div>
+                    <label class="field-label">Token OTP</label>
+                    <input type="text"
+                           name="otp"
+                           required
+                           maxlength="4"
+                           pattern="\d{4}"
+                           class="otp-input"
+                           placeholder="••••">
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="submit-btn">
+                    <i class="ti ti-circle-check" style="font-size:19px;"></i>
+                    Verify Token
+                </button>
+
+            </form>
+
+            <hr class="divider">
+
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:12px; color:#9ca3af;">
+                    <span class="status-dot"></span>System online
+                </span>
+                <a href="/" class="logout-link">
+                    <i class="ti ti-logout" style="font-size:15px;"></i>
+                    Log Out
+                </a>
             </div>
 
-            <!-- OTP -->
-            <div>
-                <input type="text"
-                       name="otp"
-                       required
-                       maxlength="4"
-                       pattern="\d{4}"
-                       class="w-full text-center tracking-[0.5em] text-2xl px-4 py-3 
-                              border border-gray-300 rounded-xl 
-                              focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
-                       placeholder="••••">
-            </div>
-
-            <!-- Button -->
-            <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white 
-                           font-semibold py-3 px-4 rounded-xl shadow-md 
-                           transition duration-200">
-                Verify Token
-            </button>
-
-        </form>
-
-        <div class="mt-6 border-t pt-4">
-            <a href="/"
-               class="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                Log Out
-            </a>
         </div>
-
     </div>
 
 </body>
