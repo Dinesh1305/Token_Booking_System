@@ -15,6 +15,9 @@ public class VerificationController {
 
     @Autowired
     private DailyBillRepository dailyBillRepository;
+    
+    @Autowired
+    private com.demo.repo.OtpRepository otpRepository;
 
     // --- ADD THIS NEW METHOD ---
     // This displays the admin form when you visit http://localhost:9002/admin/dashboard
@@ -23,16 +26,25 @@ public class VerificationController {
         return "admin_dashboard"; // Maps to src/main/resources/templates/admin_dashboard.html
     }
 
-    // This remains the same as before
+
+
     @PostMapping("/verify")
     public String verifyOtp(@RequestParam("otp") String otpStr, Model model) {
         boolean isVerified = false;
         try {
             Integer otp = Integer.parseInt(otpStr);
             DailyBill bill = dailyBillRepository.findByOtt(otp);
+            
             if (bill != null) {
-                isVerified = true;
+                // 1. Save to new 'otp_history' table
+                com.demo.model.Otp history = new com.demo.model.Otp();
+                history.setEmail(bill.getEmail());
+                history.setOtp(otp);
+                otpRepository.save(history);
+                
+                // 2. Delete from original
                 dailyBillRepository.deleteByOtt(otp);
+                isVerified = true;
             }
         } catch (NumberFormatException e) {
             isVerified = false;
