@@ -17,6 +17,9 @@ public class BookingRecord {
     private String foodItem;
     private Integer cost;
     private Date bookingTime;
+    
+    // NEW FIELD: Tracks if the food was received
+    private String status = "Not Received";
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -29,4 +32,6 @@ public class BookingRecord {
     public void setCost(Integer cost) { this.cost = cost; }
     public Date getBookingTime() { return bookingTime; }
     public void setBookingTime(Date bookingTime) { this.bookingTime = bookingTime; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

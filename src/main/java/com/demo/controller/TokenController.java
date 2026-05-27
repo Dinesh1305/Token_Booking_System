@@ -55,7 +55,21 @@ public class TokenController {
         model.addAttribute("foodItem", food);
         return "otp"; 
     }
-
+    @GetMapping("/admin_profile")
+    public String showAdminProfile(Model model) {
+        // Fetch only today's bookings
+        List<BookingRecord> todaysBookings = bookingRecordRepository.findAllTodayBookings();
+        
+        // Calculate total tokens and total revenue for today
+        long totalTokens = todaysBookings.size();
+        int totalRevenue = todaysBookings.stream().mapToInt(BookingRecord::getCost).sum();
+        
+        model.addAttribute("bookings", todaysBookings);
+        model.addAttribute("totalTokens", totalTokens);
+        model.addAttribute("totalRevenue", totalRevenue);
+        
+        return "admin_profile";
+    }
     @PostMapping("/verifyOtp")
     public String verifyOtp(@RequestParam("otp") String userOtp,
                             @RequestParam("foodItem") String food,
