@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --teal-deep: #0a4a4a;
@@ -19,7 +19,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #e0f7f7 0%, #b2dfdb 35%, #e0f2f1 70%, #f0fdfa 100%);
             min-height: 100vh;
             color: #0a4a4a;
@@ -60,14 +60,12 @@
             z-index: 100;
         }
 
-        /* Avatar ring animation */
+        /* Avatar ring */
         .avatar-ring {
             background: conic-gradient(from 0deg, #26c6da, #00897b, #4db6ac, #26c6da);
             border-radius: 50%;
             padding: 3px;
-            animation: spinRing 6s linear infinite;
         }
-        @keyframes spinRing { to { transform: rotate(360deg); } }
 
         /* Stat card hover */
         .stat-card {
@@ -92,8 +90,7 @@
             background: linear-gradient(135deg, #0097a7 0%, #00796b 100%);
             color: #fff;
             border-radius: 0.875rem;
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 0.01em;
             transition: box-shadow 0.22s, transform 0.18s, filter 0.18s;
             box-shadow: 0 3px 14px rgba(0,140,140,0.22);
@@ -117,15 +114,11 @@
             background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%);
             color: #00796b;
             font-size: 0.72rem;
-            font-weight: 700;
-            font-family: 'Syne', sans-serif;
+            font-weight: 600;
             letter-spacing: 0.04em;
             border: 1.2px solid #80cbc4;
             box-shadow: 0 1px 6px rgba(0,120,100,0.10);
         }
-
-        /* Font for headings */
-        h1, h2, h3, .syne { font-family: 'Syne', sans-serif; }
 
         /* Entrance animations */
         .fade-up {
@@ -141,9 +134,8 @@
 
         /* Table header */
         thead tr th {
-            font-family: 'Syne', sans-serif;
-            letter-spacing: 0.07em;
-            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
         }
 
         /* Scrollbar */
@@ -181,14 +173,12 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- Background Blobs -->
     <div class="bg-blob blob1"></div>
     <div class="bg-blob blob2"></div>
     <div class="bg-blob blob3"></div>
 
     <div class="max-w-4xl mx-auto space-y-6 relative z-10">
 
-        <!-- ─── Sticky Navigation ──────────────────────────── -->
         <nav class="sticky-nav fade-up">
             <div class="glass-card flex justify-between items-center px-6 py-3.5">
                 <div class="flex items-center gap-3">
@@ -198,7 +188,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0121 21H3a12.083 12.083 0 012.84-10.422L12 14z"/>
                         </svg>
                     </div>
-                    <h1 class="text-base font-bold tracking-tight text-teal-900">My Profile</h1>
+                    <h1 class="text-base font-semibold tracking-tight text-teal-900">My Profile</h1>
                 </div>
                 <a href="/book" class="btn-back flex items-center gap-2 px-5 py-2.5 text-sm">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -209,23 +199,20 @@
             </div>
         </nav>
 
-        <!-- ─── Profile Header Card ───────────────────────── -->
         <div class="glass-card p-8 fade-up delay-1">
             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
 
-                <!-- Avatar with spinning ring -->
                 <div class="avatar-ring flex-shrink-0">
-                    <div class="h-20 w-20 rounded-full bg-gradient-to-tr from-cyan-400 to-teal-600 flex items-center justify-center text-white text-3xl font-extrabold shadow-inner select-none" style="font-family:'Syne',sans-serif;">
+                    <div class="h-20 w-20 rounded-full bg-gradient-to-tr from-cyan-400 to-teal-600 flex items-center justify-center text-white text-3xl font-bold shadow-inner select-none">
                         <span th:text="${#strings.substring(student.name, 0, 1)}">S</span>
                     </div>
                 </div>
 
-                <!-- Info -->
                 <div class="flex-1 text-center sm:text-left">
                     <div class="inline-flex items-center gap-2 mb-1.5">
-                        <span class="text-xs font-semibold bg-cyan-100 text-cyan-700 border border-cyan-200 px-3 py-0.5 rounded-full" style="font-family:'Syne',sans-serif;">Student</span>
+                        <span class="text-xs font-semibold bg-cyan-100 text-cyan-700 border border-cyan-200 px-3 py-0.5 rounded-full">Student</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-teal-950 leading-tight tracking-tight" th:text="${student.name}">Student Name</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-teal-950 leading-tight tracking-tight" th:text="${student.name}">Student Name</h2>
                     <div class="flex items-center justify-center sm:justify-start gap-2 mt-2 text-teal-600 font-medium text-sm">
                         <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -234,9 +221,8 @@
                     </div>
                 </div>
 
-                <!-- Quick status chip -->
                 <div class="flex-shrink-0 hidden sm:flex flex-col items-end gap-2">
-                    <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-2 text-xs font-bold" style="font-family:'Syne',sans-serif;">
+                    <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-2 text-xs font-semibold">
                         <span class="h-2 w-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
                         Active Student
                     </div>
@@ -244,7 +230,6 @@
             </div>
         </div>
 
-        <!-- ─── Stats Row ─────────────────────────────────── -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 fade-up delay-2">
 
             <div class="glass-card stat-card p-5 flex flex-col gap-2">
@@ -254,7 +239,7 @@
                     </svg>
                 </div>
                 <p class="text-xs text-teal-600 font-medium mt-1">Total Bookings</p>
-                <p class="text-2xl font-extrabold text-teal-900" style="font-family:'Syne',sans-serif;" th:text="${bookings.size()}">0</p>
+                <p class="text-2xl font-bold text-teal-900" th:text="${bookings.size()}">0</p>
             </div>
 
             <div class="glass-card stat-card p-5 flex flex-col gap-2">
@@ -264,7 +249,7 @@
                     </svg>
                 </div>
                 <p class="text-xs text-teal-600 font-medium mt-1">Total Spent</p>
-                <p class="text-2xl font-extrabold text-teal-900" style="font-family:'Syne',sans-serif;">
+                <p class="text-2xl font-bold text-teal-900">
                     ₹<span th:text="${#aggregates.sum(bookings.![cost])}">0</span>
                 </p>
             </div>
@@ -276,7 +261,7 @@
                     </svg>
                 </div>
                 <p class="text-xs text-teal-600 font-medium mt-1">Confirmed</p>
-                <p class="text-2xl font-extrabold text-teal-900" style="font-family:'Syne',sans-serif;" th:text="${bookings.size()}">0</p>
+                <p class="text-2xl font-bold text-teal-900" th:text="${bookings.size()}">0</p>
             </div>
 
             <div class="glass-card stat-card p-5 flex flex-col gap-2">
@@ -286,12 +271,11 @@
                     </svg>
                 </div>
                 <p class="text-xs text-teal-600 font-medium mt-1">Meals Enjoyed</p>
-                <p class="text-2xl font-extrabold text-teal-900" style="font-family:'Syne',sans-serif;" th:text="${bookings.size()}">0</p>
+                <p class="text-2xl font-bold text-teal-900" th:text="${bookings.size()}">0</p>
             </div>
 
         </div>
 
-        <!-- ─── Token History Table ───────────────────────── -->
         <div class="glass-card p-6 md:p-8 fade-up delay-3">
             <div class="flex items-center justify-between mb-1">
                 <div class="flex items-center gap-3">
@@ -302,36 +286,35 @@
                     </div>
                     <h3 class="text-xl font-bold text-teal-950">Meal Token History</h3>
                 </div>
-                <span class="text-xs text-teal-500 font-medium bg-teal-50 border border-teal-200 rounded-xl px-3 py-1.5 hidden sm:block" style="font-family:'Syne',sans-serif;">
+                <span class="text-xs text-teal-500 font-medium bg-teal-50 border border-teal-200 rounded-xl px-3 py-1.5 hidden sm:block">
                     All Records
                 </span>
             </div>
             <div class="shimmer-line"></div>
 
-            <!-- TABLE -->
             <div class="table-wrap overflow-x-auto rounded-2xl border border-white/60 shadow-inner bg-white/20">
                 <table class="w-full text-left border-collapse" style="min-width:580px;">
                     <thead>
                         <tr style="background:rgba(178,223,219,0.35);">
-                            <th class="px-6 py-4 text-teal-700 uppercase tracking-widest text-xs font-bold">
+                            <th class="px-6 py-4 text-teal-700 uppercase font-semibold">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                     Booking Date &amp; Time
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-teal-700 uppercase tracking-widest text-xs font-bold">
+                            <th class="px-6 py-4 text-teal-700 uppercase font-semibold">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                     Food Item
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-teal-700 uppercase tracking-widest text-xs font-bold">
+                            <th class="px-6 py-4 text-teal-700 uppercase font-semibold">
                                 <div class="flex items-center gap-2">
                                     <svg class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
                                     Amount Paid
                                 </div>
                             </th>
-                            <th class="px-6 py-4 text-teal-700 uppercase tracking-widest text-xs font-bold">Status</th>
+                            <th class="px-6 py-4 text-teal-700 uppercase font-semibold">Status</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-teal-100/40">
@@ -353,7 +336,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex items-center gap-1 text-sm font-extrabold text-teal-700" style="font-family:'Syne',sans-serif;">
+                                <span class="inline-flex items-center gap-1 text-sm font-bold text-teal-700">
                                     ₹<span th:text="${bill.cost}">120</span>
                                 </span>
                             </td>
@@ -367,7 +350,6 @@
                             </td>
                         </tr>
 
-                        <!-- Empty State -->
                         <tr th:if="${#lists.isEmpty(bookings)}">
                             <td colspan="4" class="px-6 py-16 text-center">
                                 <div class="flex flex-col items-center gap-4">
@@ -377,7 +359,7 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <p class="text-base font-bold text-teal-800 mb-1" style="font-family:'Syne',sans-serif;">No Meal Tokens Yet</p>
+                                        <p class="text-base font-bold text-teal-800 mb-1">No Meal Tokens Yet</p>
                                         <p class="text-sm text-teal-500 max-w-xs mx-auto">You haven't booked any meals yet. Head to the dashboard to grab your first token!</p>
                                     </div>
                                     <a href="/book" class="btn-back flex items-center gap-2 px-5 py-2.5 text-sm mt-1">
@@ -392,11 +374,9 @@
                 </table>
             </div>
 
-            <!-- Footer note -->
             <p class="text-xs text-teal-400 text-right mt-3 pr-1">Showing all confirmed tokens</p>
         </div>
 
-        <!-- Footer -->
         <div class="text-center text-xs text-teal-400 pb-6 fade-up delay-4">
             Campus Meal Portal &nbsp;·&nbsp; All rights reserved
         </div>
