@@ -31,12 +31,25 @@ public class TokenController {
     public String generateOtp(@RequestParam("foodItem") String food,
                               @CookieValue(value = "email", required = false) String email,
                               RedirectAttributes redirectAttributes) {
-        if (email == null) return "redirect:/?error=true";
+        
+        if (email == null) {
+            return "redirect:/?error=true";
+        }
+
+        // --- NEW: ONE TOKEN PER DAY CHECK ---
+        long alreadyBookedToday = bookingRecordRepository.countByEmailAndToday(email);
+        
+        if (alreadyBookedToday > 0) {
+            // Redirect back to the booking page with a warning
+            redirectAttributes.addFlashAttribute("errorMsg", "⚠️ You have already booked a meal token for today!");
+            return "redirect:/book";
+        }
+        // ------------------------------------
+
         otpService.generateAndStoreOtp(email);
         redirectAttributes.addAttribute("foodItem", food);
         return "redirect:/enterOtp";
     }
-
     @GetMapping("/enterOtp")
     public String showOtpPage(@RequestParam("foodItem") String food, Model model) {
         model.addAttribute("foodItem", food);
